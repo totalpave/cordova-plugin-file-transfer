@@ -37,6 +37,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -525,6 +527,12 @@ public class FileTransfer extends CordovaPlugin {
                     JSONObject error = createFileTransferError(FILE_NOT_FOUND_ERR, source, target, conn, e);
                     LOG.e(LOG_TAG, error.toString(), e);
                     context.sendPluginResult(new PluginResult(PluginResult.Status.IO_EXCEPTION, error));
+                } catch(KeyManagementException e) {
+                    LOG.e(LOG_TAG, e.getMessage(), e);
+                    context.sendPluginResult(new PluginResult(PluginResult.Status.IO_EXCEPTION));
+                } catch(NoSuchAlgorithmException e) {
+                    LOG.e(LOG_TAG, e.getMessage(), e);
+                    context.sendPluginResult(new PluginResult(PluginResult.Status.IO_EXCEPTION));
                 } catch (IOException e) {
                     JSONObject error = createFileTransferError(CONNECTION_ERR, source, target, conn, e);
                     LOG.e(LOG_TAG, error.toString(), e);
