@@ -15,6 +15,9 @@
        KIND, either express or implied.  See the License for the
        specific language governing permissions and limitations
        under the License.
+
+  Modifications
+  - TLS1.1+ support.
 */
 package org.apache.cordova.filetransfer;
 
